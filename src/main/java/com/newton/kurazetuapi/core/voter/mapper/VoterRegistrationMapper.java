@@ -32,7 +32,7 @@ public class VoterRegistrationMapper {
                 .build();
     }
 
-    public VoterRegistration toEntity(VoterRegistrationRequestDto dto, County county) {
+    public VoterRegistration toEntity(VoterRegistrationRequestDto dto, County county, String ipAddress) {
         if (dto == null) {
             return null;
         }
@@ -42,6 +42,7 @@ public class VoterRegistrationMapper {
         registration.setAge(dto.getAge());
         registration.setEmail(dto.getEmail());
         registration.setCounty(county);
+        registration.setIpAddress(ipAddress);
         registration.setConfirmed(false);
 
         return registration;

@@ -16,7 +16,8 @@ import java.time.LocalDateTime;
         @Index(name = "idx_email", columnList = "email"),
         @Index(name = "idx_county", columnList = "county_id"),
         @Index(name = "idx_registration_date", columnList = "registrationDate"),
-        @Index(name = "idx_confirmed", columnList = "confirmed")
+        @Index(name = "idx_confirmed", columnList = "confirmed"),
+        @Index(name = "idx_ip_address", columnList = "ipAddress")
 })
 @Data
 @NoArgsConstructor
@@ -46,6 +47,9 @@ public class VoterRegistration {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "county_id", nullable = false)
     private County county;
+
+    @Column(length = 45)
+    private String ipAddress;
 
     @NotNull(message = "Registration date is required")
     @Column(nullable = false)

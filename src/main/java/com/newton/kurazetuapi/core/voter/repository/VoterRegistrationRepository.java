@@ -17,6 +17,8 @@ public interface VoterRegistrationRepository extends JpaRepository<VoterRegistra
 
     boolean existsByEmail(String email);
 
+    boolean existsByIpAddress(String ipAddress);
+
     List<VoterRegistration> findByCountyId(Long countyId);
 
     List<VoterRegistration> findByConfirmed(Boolean confirmed);

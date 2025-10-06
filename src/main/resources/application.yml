@@ -88,16 +88,16 @@ server:
 app:
   kafka:
     email:
-      topic: juahaki.email.events
-      retry-topic: juahaki.email.retry
-      dlt-topic: juahaki.email.dlt
+      topic: kurazetu.email.events
+      retry-topic: kurazetu.email.retry
+      dlt-topic: kurazetu.email.dlt
     consumer:
-      group-id: juahaki-email-service
+      group-id: kurazetu-email-service
 
   email:
     max-retry-attempts: 3
-    from-name: JuaHaki Civic Educator
-    base-url: juahaki.com
+    from-name: kurazetu
+    base-url: kurazetu.com
 
 api:
   prefix: api/v1
