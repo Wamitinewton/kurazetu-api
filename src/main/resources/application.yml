@@ -1,0 +1,103 @@
+spring:
+  application:
+    name: kurazetu-api
+  config:
+    import:
+      - "file:keys.properties"
+  jpa:
+    hibernate:
+      ddl-auto: create
+    properties:
+      hibernate:
+        default_schema: public
+  datasource:
+    url: ${database.url}
+    username: ${database.username}
+    password: ${database.password}
+    driver-class-name: org.postgresql.Driver
+
+  thymeleaf:
+    prefix: classpath:/templates/
+    suffix: .html
+    mode: HTML
+    encoding: UTF-8
+    cache: false
+
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: ${mail.username}
+    password: ${mail.password}
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+            required: true
+          ssl:
+            trust: smtp.gmail.com
+
+
+  kafka:
+    bootstrap-servers: ${KAFKA_BOOTSTRAP_SERVERS:localhost:9092}
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+      acks: all
+      retries: 3
+      properties:
+        enable.idempotence: true
+        max.in.flight.requests.per.connection: 1
+        compression.type: snappy
+        batch.size: 16384
+        linger.ms: 5
+    consumer:
+      group-id: ${app.kafka.consumer.group-id}
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      auto-offset-reset: earliest
+      enable-auto-commit: false
+      max-poll-records: 10
+      properties:
+        spring.json.trusted.packages: "com.juahaki.juahaki.dto.email"
+        session.timeout.ms: 30000
+        heartbeat.interval.ms: 10000
+
+  data:
+    redis:
+      host: ${redis.host.url}
+      port: ${redis.port:6380}
+      password: ${redis.password}
+      ssl:
+        enabled: false
+      timeout: 2000ms
+      lettuce:
+        pool:
+          max-active: 8
+          max-idle: 8
+          min-idle: 0
+
+server:
+  port: 8075
+  servlet:
+    context-path: /
+
+
+
+app:
+  kafka:
+    email:
+      topic: juahaki.email.events
+      retry-topic: juahaki.email.retry
+      dlt-topic: juahaki.email.dlt
+    consumer:
+      group-id: juahaki-email-service
+
+  email:
+    max-retry-attempts: 3
+    from-name: JuaHaki Civic Educator
+    base-url: juahaki.com
+
+api:
+  prefix: api/v1
