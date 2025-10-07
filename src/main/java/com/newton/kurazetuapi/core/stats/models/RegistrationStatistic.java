@@ -11,7 +11,6 @@ import org.springframework.data.annotation.LastModifiedDate;
 
 import java.time.LocalDateTime;
 
-
 @Entity
 @Table(name = "registration_statistics", indexes = {
         @Index(name = "idx_stat_date", columnList = "statisticDate"),
@@ -35,31 +34,7 @@ public class RegistrationStatistic {
     private LocalDateTime statisticDate;
 
     @Column(nullable = false)
-    private Long totalRegistrations = 0L;
-
-    @Column(nullable = false)
-    private Long confirmedRegistrations = 0L;
-
-    @Column(nullable = false)
-    private Long pendingRegistrations = 0L;
-
-    @Column
-    private Double averageAge;
-
-    @Column
-    private Integer minAge;
-
-    @Column
-    private Integer maxAge;
-
-    @Column(nullable = false)
-    private Long registrationsToday = 0L;
-
-    @Column(nullable = false)
-    private Long registrationsThisWeek = 0L;
-
-    @Column(nullable = false)
-    private Long registrationsThisMonth = 0L;
+    private Long totalVerifiedRegistrations = 0L;
 
     @CreatedDate
     @Column(nullable = false, updatable = false)

@@ -1,20 +1,17 @@
 package com.newton.kurazetuapi.core.stats.dto;
 
-import com.newton.kurazetuapi.core.county.dto.CountyDto;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDateTime;
+import java.util.List;
 
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class RegistrationStatisticDto {
-    private Long id;
-    private CountyDto county;
+public class AllCountiesStatsDto {
     private Long totalVerifiedRegistrations;
-    private LocalDateTime statisticDate;
+    private List<CountyStatsDto> countyStats;
 }

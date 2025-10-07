@@ -20,17 +20,8 @@ public class RegistrationStatisticMapper {
         return RegistrationStatisticDto.builder()
                 .id(statistic.getId())
                 .county(countyMapper.toDto(statistic.getCounty()))
+                .totalVerifiedRegistrations(statistic.getTotalVerifiedRegistrations())
                 .statisticDate(statistic.getStatisticDate())
-                .totalRegistrations(statistic.getTotalRegistrations())
-                .confirmedRegistrations(statistic.getConfirmedRegistrations())
-                .pendingRegistrations(statistic.getPendingRegistrations())
-                .averageAge(statistic.getAverageAge())
-                .minAge(statistic.getMinAge())
-                .maxAge(statistic.getMaxAge())
-                .registrationsToday(statistic.getRegistrationsToday())
-                .registrationsThisWeek(statistic.getRegistrationsThisWeek())
-                .registrationsThisMonth(statistic.getRegistrationsThisMonth())
-                .createdAt(statistic.getCreatedAt())
                 .build();
     }
 }

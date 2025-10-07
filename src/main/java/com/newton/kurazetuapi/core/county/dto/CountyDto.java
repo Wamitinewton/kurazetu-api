@@ -15,6 +15,5 @@ public class CountyDto {
     private Long id;
     private String name;
     private String code;
-    private String description;
     private LocalDateTime createdAt;
 }

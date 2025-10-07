@@ -16,7 +16,6 @@ public class CountyMapper {
                 .id(county.getId())
                 .name(county.getName())
                 .code(county.getCode())
-                .description(county.getDescription())
                 .createdAt(county.getCreatedAt())
                 .build();
     }
@@ -30,7 +29,6 @@ public class CountyMapper {
         county.setId(dto.getId());
         county.setName(dto.getName());
         county.setCode(dto.getCode());
-        county.setDescription(dto.getDescription());
         county.setCreatedAt(dto.getCreatedAt());
 
         return county;

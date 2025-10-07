@@ -7,7 +7,6 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.time.LocalDateTime;
-import java.util.List;
 import java.util.Optional;
 
 @Repository
@@ -17,13 +16,6 @@ public interface RegistrationStatisticRepository extends JpaRepository<Registrat
 
     Optional<RegistrationStatistic> findTopByCountyIsNullOrderByStatisticDateDesc();
 
-    List<RegistrationStatistic> findByCountyIdOrderByStatisticDateDesc(Long countyId);
-
-    List<RegistrationStatistic> findByCountyIsNullOrderByStatisticDateDesc();
-
-    @Query("SELECT r FROM RegistrationStatistic r WHERE r.statisticDate >= :startDate ORDER BY r.statisticDate DESC")
-    List<RegistrationStatistic> findStatisticsSince(@Param("startDate") LocalDateTime startDate);
-
     @Query("SELECT r FROM RegistrationStatistic r WHERE r.county.id = :countyId AND r.statisticDate >= :startDate ORDER BY r.statisticDate DESC")
-    List<RegistrationStatistic> findCountyStatisticsSince(@Param("countyId") Long countyId, @Param("startDate") LocalDateTime startDate);
+    Optional<RegistrationStatistic> findLatestCountyStatisticSince(@Param("countyId") Long countyId, @Param("startDate") LocalDateTime startDate);
 }

@@ -16,6 +16,10 @@ spring:
     password: ${database.password}
     driver-class-name: org.postgresql.Driver
 
+  sql:
+    init:
+      mode: always
+
   thymeleaf:
     prefix: classpath:/templates/
     suffix: .html
