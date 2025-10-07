@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Welcome to the Movement - GenZChange</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333333;
+            background-color: #f4f4f4;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        .email-wrapper {
+            width: 100%;
+            background-color: #f4f4f4;
+            padding: 20px 0;
+        }
+        .email-container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+        .header {
+            background: linear-gradient(135deg, #48bb78 0%, #38a169 100%);
+            padding: 40px 20px;
+            text-align: center;
+        }
+        .celebration-icon {
+            font-size: 60px;
+            margin-bottom: 15px;
+        }
+        .header h1 {
+            color: #ffffff;
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+        .header p {
+            color: #e6fffa;
+            font-size: 16px;
+        }
+        .content {
+            padding: 40px 30px;
+        }
+        .greeting {
+            font-size: 22px;
+            color: #1a202c;
+            margin-bottom: 20px;
+            font-weight: 600;
+            text-align: center;
+        }
+        .message {
+            font-size: 16px;
+            color: #4a5568;
+            line-height: 1.8;
+            margin-bottom: 25px;
+        }
+        .highlight-box {
+            background: linear-gradient(135deg, #f6f9fc 0%, #eef2f7 100%);
+            border-radius: 8px;
+            padding: 25px;
+            margin: 30px 0;
+            text-align: center;
+        }
+        .highlight-box h2 {
+            color: #2d3748;
+            font-size: 20px;
+            margin-bottom: 15px;
+        }
+        .highlight-box p {
+            color: #4a5568;
+            font-size: 15px;
+        }
+        .benefits-section {
+            margin: 35px 0;
+        }
+        .benefits-section h3 {
+            color: #2d3748;
+            font-size: 20px;
+            margin-bottom: 20px;
+            text-align: center;
+            font-weight: 600;
+        }
+        .benefit-item {
+            display: flex;
+            align-items: start;
+            margin-bottom: 20px;
+            padding: 15px;
+            background-color: #f7fafc;
+            border-radius: 6px;
+            border-left: 4px solid #48bb78;
+        }
+        .benefit-icon {
+            font-size: 24px;
+            margin-right: 15px;
+            flex-shrink: 0;
+        }
+        .benefit-content h4 {
+            color: #2d3748;
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+        .benefit-content p {
+            color: #4a5568;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+        .stats-box {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 8px;
+            padding: 30px;
+            margin: 30px 0;
+            text-align: center;
+        }
+        .stats-box h3 {
+            color: #ffffff;
+            font-size: 18px;
+            margin-bottom: 15px;
+        }
+        .stats-box .stat-number {
+            color: #ffffff;
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+        .stats-box p {
+            color: #e0e7ff;
+            font-size: 14px;
+        }
+        .cta-container {
+            text-align: center;
+            margin: 35px 0;
+        }
+        .cta-button {
+            display: inline-block;
+            padding: 16px 40px;
+            background: linear-gradient(135deg, #48bb78 0%, #38a169 100%);
+            color: #ffffff;
+            text-decoration: none;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: 600;
+            transition: transform 0.2s;
+        }
+        .cta-button:hover {
+            transform: translateY(-2px);
+        }
+        .quote-box {
+            border-left: 4px solid #48bb78;
+            padding: 20px 25px;
+            margin: 30px 0;
+            background-color: #f7fafc;
+            border-radius: 4px;
+        }
+        .quote-box p {
+            font-size: 16px;
+            color: #2d3748;
+            font-style: italic;
+            line-height: 1.7;
+        }
+        .quote-box .author {
+            margin-top: 10px;
+            font-size: 14px;
+            color: #718096;
+            font-style: normal;
+            font-weight: 600;
+        }
+        .footer {
+            background-color: #1a202c;
+            padding: 30px;
+            text-align: center;
+        }
+        .footer p {
+            color: #a0aec0;
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+        .footer .brand {
+            color: #ffffff;
+            font-weight: 700;
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+        .social-links {
+            margin-top: 20px;
+        }
+        .social-links a {
+            display: inline-block;
+            margin: 0 10px;
+            color: #a0aec0;
+            text-decoration: none;
+            font-size: 14px;
+        }
+        @media only screen and (max-width: 600px) {
+            .email-wrapper {
+                padding: 10px 0;
+            }
+            .content {
+                padding: 30px 20px;
+            }
+            .celebration-icon {
+                font-size: 50px;
+            }
+            .header h1 {
+                font-size: 26px;
+            }
+            .header p {
+                font-size: 14px;
+            }
+            .greeting {
+                font-size: 20px;
+            }
+            .message {
+                font-size: 15px;
+            }
+            .highlight-box {
+                padding: 20px;
+            }
+            .highlight-box h2 {
+                font-size: 18px;
+            }
+            .benefits-section h3 {
+                font-size: 18px;
+            }
+            .benefit-item {
+                padding: 12px;
+            }
+            .benefit-icon {
+                font-size: 20px;
+                margin-right: 12px;
+            }
+            .stats-box {
+                padding: 25px 20px;
+            }
+            .stats-box .stat-number {
+                font-size: 30px;
+            }
+            .cta-button {
+                padding: 14px 30px;
+                font-size: 15px;
+            }
+            .footer {
+                padding: 25px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="email-wrapper">
+    <div class="email-container">
+        <div class="header">
+            <div class="celebration-icon">🎉</div>
+            <h1>You're Now a Registered Voter!</h1>
+            <p>Welcome to the movement for change</p>
+        </div>
+
+        <div class="content">
+            <div class="greeting">
+                Congratulations, Change Maker!
+            </div>
+
+            <div class="message">
+                <p>Your commitment to participate in Kenya's democratic process has been successfully recorded. You are now part of a growing community of citizens who refuse to sit on the sidelines and are actively working toward a better future.</p>
+            </div>
+
+            <div class="highlight-box">
+                <h2>✅ Your Registration is Complete</h2>
+                <p>You've officially joined thousands of Kenyans committed to making their voices heard through the ballot box.</p>
+            </div>
+
+            <div class="benefits-section">
+                <h3>Why Your Vote Matters</h3>
+
+                <div class="benefit-item">
+                    <div class="benefit-icon">🏛️</div>
+                    <div class="benefit-content">
+                        <h4>Shape Leadership</h4>
+                        <p>Your vote directly determines who leads our nation, counties, and communities. Good leaders create good policies that improve lives.</p>
+                    </div>
+                </div>
+
+                <div class="benefit-item">
+                    <div class="benefit-icon">💪</div>
+                    <div class="benefit-content">
+                        <h4>Demand Accountability</h4>
+                        <p>Voting gives you the power to hold leaders accountable. They work for you, and your vote ensures they remember that.</p>
+                    </div>
+                </div>
+
+                <div class="benefit-item">
+                    <div class="benefit-icon">🌍</div>
+                    <div class="benefit-content">
+                        <h4>Drive National Progress</h4>
+                        <p>Elections determine policies on education, healthcare, economy, and infrastructure. Your vote shapes Kenya's development trajectory.</p>
+                    </div>
+                </div>
+
+                <div class="benefit-item">
+                    <div class="benefit-icon">🔊</div>
+                    <div class="benefit-content">
+                        <h4>Amplify Your Voice</h4>
+                        <p>Democracy thrives when citizens participate. Your vote represents your values, hopes, and vision for Kenya's future.</p>
+                    </div>
+                </div>
+
+                <div class="benefit-item">
+                    <div class="benefit-icon">👥</div>
+                    <div class="benefit-content">
+                        <h4>Protect Your Rights</h4>
+                        <p>Voting safeguards your freedoms and rights. It's how we ensure our constitution and democratic institutions remain strong.</p>
+                    </div>
+                </div>
+
+                <div class="benefit-item">
+                    <div class="benefit-icon">🎯</div>
+                    <div class="benefit-content">
+                        <h4>Create Generational Impact</h4>
+                        <p>The leaders elected today make decisions that affect future generations. Vote for the Kenya you want your children to inherit.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="quote-box">
+                <p>"The ballot is stronger than the bullet. Your vote is your voice, your power, and your responsibility to shape the nation we all deserve."</p>
+                <div class="author">— GenZChange</div>
+            </div>
+
+            <div class="message">
+                <p>Remember, every vote counts. Low voter turnout allows poor leadership to persist. But when citizens like you show up and vote wisely, we create the pressure needed for genuine change.</p>
+            </div>
+
+            <div class="stats-box">
+                <h3>Be Part of the Movement</h3>
+                <div class="stat-number">Join Us</div>
+                <p>Together, we're building a database of committed voters who refuse to accept the status quo and are ready to vote for transformative leadership.</p>
+            </div>
+
+            <div class="message">
+                <p><strong>What's Next?</strong></p>
+                <p>Stay informed about election dates, candidates, and issues. Research before you vote. Share this movement with friends and family. Most importantly, when election day comes, show up and cast your ballot.</p>
+            </div>
+
+            <div class="cta-container">
+                <a href="https://genzchange.or.ke/dashboard" class="cta-button">View Your Dashboard</a>
+            </div>
+
+            <div class="message" style="margin-top: 30px;">
+                <p>Thank you for being part of the solution. Together, we're proving that change is not just possible—it's inevitable when enough people decide to participate.</p>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p class="brand">GenZChange</p>
+            <p>Empowering voters, transforming Kenya, building tomorrow.</p>
+            <p>Your voice matters. Your vote matters. You matter.</p>
+            <div class="social-links">
+                <a href="https://genzchange.or.ke">Visit Website</a>
+                <span style="color: #4a5568;">•</span>
+                <a href="https://genzchange.or.ke/about">About Us</a>
+                <span style="color: #4a5568;">•</span>
+                <a href="mailto:support@genzchange.or.ke">Contact Support</a>
+            </div>
+            <p style="margin-top: 20px; font-size: 12px;">
+                © 2024 GenZChange. All rights reserved.
+            </p>
+        </div>
+    </div>
+</div>
+</body>
+</html>

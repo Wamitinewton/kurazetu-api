@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Verify Your Email - GenZChange</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333333;
+            background-color: #f4f4f4;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        .email-wrapper {
+            width: 100%;
+            background-color: #f4f4f4;
+            padding: 20px 0;
+        }
+        .email-container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 40px 20px;
+            text-align: center;
+        }
+        .header h1 {
+            color: #ffffff;
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+        .header p {
+            color: #e0e7ff;
+            font-size: 16px;
+        }
+        .content {
+            padding: 40px 30px;
+        }
+        .greeting {
+            font-size: 20px;
+            color: #1a202c;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+        .message {
+            font-size: 16px;
+            color: #4a5568;
+            line-height: 1.8;
+            margin-bottom: 30px;
+        }
+        .cta-container {
+            text-align: center;
+            margin: 35px 0;
+        }
+        .cta-button {
+            display: inline-block;
+            padding: 16px 40px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #ffffff;
+            text-decoration: none;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: 600;
+            transition: transform 0.2s;
+        }
+        .cta-button:hover {
+            transform: translateY(-2px);
+        }
+        .info-box {
+            background-color: #f7fafc;
+            border-left: 4px solid #667eea;
+            padding: 20px;
+            margin: 25px 0;
+            border-radius: 4px;
+        }
+        .info-box p {
+            font-size: 14px;
+            color: #4a5568;
+            margin: 0;
+        }
+        .link-fallback {
+            margin-top: 25px;
+            padding: 20px;
+            background-color: #f7fafc;
+            border-radius: 6px;
+        }
+        .link-fallback p {
+            font-size: 13px;
+            color: #718096;
+            margin-bottom: 10px;
+        }
+        .link-fallback a {
+            color: #667eea;
+            word-break: break-all;
+            font-size: 13px;
+        }
+        .footer {
+            background-color: #1a202c;
+            padding: 30px;
+            text-align: center;
+        }
+        .footer p {
+            color: #a0aec0;
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+        .footer .brand {
+            color: #ffffff;
+            font-weight: 700;
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+        .social-links {
+            margin-top: 20px;
+        }
+        .social-links a {
+            display: inline-block;
+            margin: 0 10px;
+            color: #a0aec0;
+            text-decoration: none;
+            font-size: 14px;
+        }
+        @media only screen and (max-width: 600px) {
+            .email-wrapper {
+                padding: 10px 0;
+            }
+            .content {
+                padding: 30px 20px;
+            }
+            .header h1 {
+                font-size: 24px;
+            }
+            .header p {
+                font-size: 14px;
+            }
+            .greeting {
+                font-size: 18px;
+            }
+            .message {
+                font-size: 15px;
+            }
+            .cta-button {
+                padding: 14px 30px;
+                font-size: 15px;
+            }
+            .footer {
+                padding: 25px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="email-wrapper">
+    <div class="email-container">
+        <div class="header">
+            <h1>🗳️ GenZChange</h1>
+            <p>Empowering Voters, Building Tomorrow</p>
+        </div>
+
+        <div class="content">
+            <div class="greeting">
+                Hello, Future Change Maker!
+            </div>
+
+            <div class="message">
+                <p>Thank you for taking the first step toward making a difference in our nation. Your commitment to registering as a voter is a powerful statement that change begins with you.</p>
+            </div>
+
+            <div class="message">
+                <p>To complete your voter registration commitment and join thousands of others driving change, please verify your email address by clicking the button below:</p>
+            </div>
+
+            <div class="cta-container">
+                <a th:href="${verificationLink}" class="cta-button">Verify My Email</a>
+            </div>
+
+            <div class="info-box">
+                <p><strong>⏰ Important:</strong> This verification link will expire in 24 hours for security purposes. Please verify your email as soon as possible.</p>
+            </div>
+
+            <div class="link-fallback">
+                <p>If the button above doesn't work, copy and paste this link into your browser:</p>
+                <a th:href="${verificationLink}" th:text="${verificationLink}"></a>
+            </div>
+
+            <div class="message" style="margin-top: 30px;">
+                <p>Once verified, you'll receive a confirmation email and be officially counted among the registered voters committed to shaping Kenya's future.</p>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p class="brand">GenZChange</p>
+            <p>Building a better Kenya, one voter at a time.</p>
+            <p>If you didn't sign up for this, please ignore this email or contact our support team.</p>
+            <div class="social-links">
+                <a href="https://genzchange.or.ke">Visit Website</a>
+                <span style="color: #4a5568;">•</span>
+                <a href="mailto:support@genzchange.or.ke">Contact Support</a>
+            </div>
+            <p style="margin-top: 20px; font-size: 12px;">
+                © 2024 GenZChange. All rights reserved.
+            </p>
+        </div>
+    </div>
+</div>
+</body>
+</html>
