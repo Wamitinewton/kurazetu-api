@@ -1,0 +1,112 @@
+spring:
+  application:
+    name: kurazetu-api
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    properties:
+      hibernate:
+        default_schema: public
+  datasource:
+    url: ${DATABASE_URL}
+    username: ${DATABASE_USERNAME}
+    password: ${DATABASE_PASSWORD}
+    driver-class-name: org.postgresql.Driver
+    hikari:
+      maximum-pool-size: 10
+      minimum-idle: 5
+      connection-timeout: 30000
+
+  sql:
+    init:
+      mode: never
+
+  thymeleaf:
+    prefix: classpath:/templates/
+    suffix: .html
+    mode: HTML
+    encoding: UTF-8
+    cache: true
+
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: ${MAIL_USERNAME}
+    password: ${MAIL_PASSWORD}
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+            required: true
+          ssl:
+            trust: smtp.gmail.com
+
+  kafka:
+    bootstrap-servers: localhost:9092
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+      acks: all
+      retries: 3
+      properties:
+        enable.idempotence: true
+        max.in.flight.requests.per.connection: 1
+        compression.type: snappy
+        batch.size: 16384
+        linger.ms: 5
+    consumer:
+      group-id: ${APP_KAFKA_CONSUMER_GROUP_ID}
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      auto-offset-reset: earliest
+      enable-auto-commit: false
+      max-poll-records: 10
+      properties:
+        spring.json.trusted.packages: "com.juahaki.juahaki.dto.email"
+        session.timeout.ms: 30000
+        heartbeat.interval.ms: 10000
+
+  data:
+    redis:
+      host: ${REDIS_HOST_URL}
+      port: ${REDIS_PORT:6380}
+      password: ${REDIS_PASSWORD}
+      ssl:
+        enabled: false
+      timeout: 2000ms
+      lettuce:
+        pool:
+          max-active: 8
+          max-idle: 8
+          min-idle: 0
+
+server:
+  port: 8075
+  servlet:
+    context-path: /
+
+app:
+  kafka:
+    email:
+      topic: kurazetu.email.events
+      retry-topic: kurazetu.email.retry
+      dlt-topic: kurazetu.email.dlt
+    consumer:
+      group-id: kurazetu-email-service
+
+  email:
+    max-retry-attempts: 3
+    from-name: kurazetu
+    base-url: ${APP_BASE_URL}
+
+api:
+  prefix: api/v1
+
+logging:
+  level:
+    root: INFO
+    com.juahaki.juahaki: INFO
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} - %msg%n"
